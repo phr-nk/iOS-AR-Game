@@ -14,6 +14,9 @@ class ViewController: UIViewController, ARSKViewDelegate {
     
     @IBOutlet var sceneView: ARSKView!
     
+     let sound = SKAction.playSoundFileNamed("neyo", waitForCompletion: false)
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -28,6 +31,9 @@ class ViewController: UIViewController, ARSKViewDelegate {
         if let scene = SKScene(fileNamed: "Scene") {
             sceneView.presentScene(scene)
         }
+        let scene = Scene(size: sceneView.bounds.size)
+        scene.scaleMode = .resizeFill
+        sceneView.presentScene(scene)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -51,10 +57,10 @@ class ViewController: UIViewController, ARSKViewDelegate {
     
     func view(_ view: ARSKView, nodeFor anchor: ARAnchor) -> SKNode? {
         // Create and configure a node for the anchor added to the view's session.
-        let labelNode = SKLabelNode(text: "👾")
-        labelNode.horizontalAlignmentMode = .center
-        labelNode.verticalAlignmentMode = .center
-        return labelNode;
+        let node = SKSpriteNode(imageNamed: "lilman")
+        node.name = "lilman"
+
+        return node
     }
     
     func session(_ session: ARSession, didFailWithError error: Error) {
